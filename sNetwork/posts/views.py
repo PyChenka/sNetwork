@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from django.http import HttpResponse
 
-# Create your views here.
+
+def index(request):
+    return HttpResponse('Это главная страница')
+
+
+
+def group_posts(response):
+	return HttpResponse('Здесь будут посты, отфильтрованные по группам')
