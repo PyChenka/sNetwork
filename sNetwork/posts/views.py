@@ -7,4 +7,5 @@ def index(request):
 
 
 def group_posts(request, slug):
-	return HttpResponse('Здесь будут посты, отфильтрованные по группам')
+    template = 'posts/group_list.html'
+    return render(request, template)
