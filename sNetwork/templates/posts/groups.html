@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  <!-- класс py-5 создает отступы сверху и снизу блока -->
+   <div class="container py-5">
+    <h3>Разделы сайта:</h3>
+    <ul>
+    {% for group in groups %}
+    <li><a href="/">{{ group.title }}</a></li> <!-- здесь потом подставить ссылки на group.slug -->
+    {% endfor %}
+    </ul>
+   </div>
+{% endblock %}
