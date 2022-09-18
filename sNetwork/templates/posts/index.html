@@ -1,6 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
-  {% for post in posts %}
+<a href={% url 'posts:groups' %}>Список сообществ</a> <!-- Ссылка на /groups -->
+<br>
+<br>
+<div class="container"> <!-- Поисковая система -->
+  <h2>Поиск по записям</h2>
+
+  <div class="card">
+    <div class="card-body">
+
+      <form class="form-inline" action="/">
+        <div class="form-row">
+        <input name="q" class="form-control form-control-lg" type="search" placeholder="Поиск" {% if keyword %}value="{{ keyword }}" {% endif %}>
+        <button class="btn" type="submit">Найти</button>
+        </div>
+      </form>
+      </div>
+    </div>
+</div>
+<br>
+<br>
+  {% for post in posts %} <!-- Вывод всех постов по давности -->
     <ul>
       <li>
         Автор: {{ post.author.get_full_name }}
