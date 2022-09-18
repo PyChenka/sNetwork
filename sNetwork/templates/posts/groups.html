@@ -4,7 +4,7 @@
     <h3>Сообщества:</h3> <!-- Ссылки на сообщества списком -->
     <ul>
     {% for group in groups %}
-    <li><a href={% url 'posts:group_posts' group.slug %}>{{ group.title }}</a></li>
+    <li><a href={{ group.get_absolute_url }}>{{ group.title }}</a></li> <!-- {% url 'posts:group_posts' group.slug %} -->
     {% endfor %}
     </ul>
    </div>

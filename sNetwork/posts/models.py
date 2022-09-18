@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -21,3 +22,6 @@ class Group(models.Model):
 
     def __str__(self):
         return self.title[:10]
+
+    def get_absolute_url(self):
+        return reverse("posts:group_posts", kwargs={"slug": self.slug})
