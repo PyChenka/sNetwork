@@ -11,7 +11,8 @@
 
       <form class="form-inline" action="/">
         <div class="form-row">
-        <input name="q" class="form-control form-control-lg" type="search" placeholder="Поиск" {% if keyword %}value="{{ keyword }}" {% endif %}>
+        <input name="q" class="form-control form-control-lg" type="search"
+          placeholder="Поиск" {% if keyword %} value={{ keyword }} {% endif %}>
         <button class="btn" type="submit">Найти</button>
         </div>
       </form>
@@ -20,7 +21,7 @@
 </div>
 <br>
 <br>
-  {% for post in posts %} <!-- Вывод всех постов по давности -->
+  {% for post in posts %}
     <ul>
       <li>
         Автор: {{ post.author.get_full_name }}
@@ -29,7 +30,7 @@
         Дата публикации: {{ post.pub_date|date:"d E Y" }}
       </li>
     </ul>
-    <p>{{ post.text }}</p>    
+    <p>{{ post.text|linebreaksbr }}</p>    
     <a href="/">все записи</a>
     {% if not forloop.last %}<hr>{% endif %}
   {% endfor %} 

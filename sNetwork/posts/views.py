@@ -1,31 +1,22 @@
-import datetime
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Group, User
 
 
 def index(request):
+    keyword = request.GET.get('q', None)
     template = 'posts/index.html'
-    posts = Post.objects.order_by('-pub_date')
-    context = {
-        'posts': posts
-        }
+    if keyword:
+        posts = Post.objects.select_related('author', 'group').filter(text__contains=keyword)
+        context = {
+            'posts': posts,
+            'keyword': keyword
+            }
+    else:
+        posts = Post.objects.order_by('-pub_date')
+        context = {
+            'posts': posts
+            }
     return render(request, template, context)
-
-# def index(request):
-#     author = User.objects.get(username='leo')
-#     keyword = "утро"
-#     start_date = datetime.datetime(1854, 7, 7, 0, 0, tzinfo=datetime.timezone.utc)
-#     end_date = datetime.datetime(1854, 7, 21, 0, 0, tzinfo=datetime.timezone.utc)
-#     posts = Post.objects.filter(text__contains=keyword).filter(author=author).filter(pub_date__range=(start_date, end_date))
-#     return render(request, 'posts/index.html', {'posts': posts})
-
-# def index(request):
-#     keyword = request.GET.get('q', None)
-#     if keyword:
-#         posts = Post.objects.select_related('author', 'group').filter(text__contains=keyword)
-#     else:
-#         posts = None
-#     return render(request, 'posts/index.html', {'posts': posts, 'keyword': keyword})
 
 
 def groups(request):
