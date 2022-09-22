@@ -3,9 +3,17 @@
 <nav class="navbar navbar-light" style="background-color: lightskyblue">
   <div class="container">
     <!-- ссылка должна вести на главную страницу -->
-    <a class="navbar-brand" href={% url 'posts:main' %}>
+    <a class="navbar-brand" href={% url 'posts:index' %}>
     <!-- тег span используется для добавления нужных стилей отдельным участкам текста -->
     <span style="color:red">s</span>Network
-   </a>
+    </a>
+    {% if user.is_authenticated %}
+        Пользователь: {{ user.username }}.
+        <a class="p-2 text-dark" href="{% url 'password_change' %}">Изменить пароль</a>
+        <a class="p-2 text-dark" href="{% url 'logout' %}">Выйти</a>
+        {% else %}
+        <a class="p-2 text-dark" href="{% url 'login' %}">Войти</a> |
+        <a class="p-2 text-dark" href="{% url 'users:signup' %}">Регистрация</a>
+    {% endif %}
   </div>
 </nav>
